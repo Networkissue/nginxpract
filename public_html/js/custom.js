@@ -1,49 +1,45 @@
-(function ($) {
 
-    "use strict";
+  (function ($) {
+  
+  "use strict";
 
-        // PRE LOADER
-        $(window).load(function(){
-          $('.preloader').delay(500).slideUp('slow'); // set duration in brackets    
-        });
+    // NAVBAR
+    $('.navbar-collapse a').on('click',function(){
+      $(".navbar-collapse").collapse('hide');
+    });
+
+    $(function() {
+      $('.hero-slides').vegas({
+          slides: [
+              { src: 'images/slides/sincere-laugh-showing-picture-smartphone-casual-meeting-with-best-friends-restaurant-terrace.jpg' },
+              { src: 'images/happy-waitress-giving-coffee-customers-while-serving-them-coffee-shop.jpg' },
+              { src: 'images/young-female-barista-wear-face-mask-serving-take-away-hot-coffee-paper-cup-consumer-cafe.jpg' }
+          ],
+          timer: false,
+          animation: 'kenburns',
+      });
+    });
+    
+    // CUSTOM LINK
+    $('.smoothscroll').click(function(){
+      var el = $(this).attr('href');
+      var elWrapped = $(el);
+      var header_height = $('.navbar').height() + 60;
+  
+      scrollToDiv(elWrapped,header_height);
+      return false;
+  
+      function scrollToDiv(element,navheight){
+        var offset = element.offset();
+        var offsetTop = offset.top;
+        var totalScroll = offsetTop-navheight;
+  
+        $('body,html').animate({
+        scrollTop: totalScroll
+        }, 300);
+      }
+    });
+  
+  })(window.jQuery);
 
 
-        // MENU
-        $('.navbar-collapse a').on('click',function(){
-          $(".navbar-collapse").collapse('hide');
-        });
-
-        $(window).scroll(function() {
-          if ($(".navbar").offset().top > 50) {
-            $(".navbar-fixed-top").addClass("top-nav-collapse");
-              } else {
-                $(".navbar-fixed-top").removeClass("top-nav-collapse");
-              }
-        });
-
-
-        // PARALLAX JS
-        function initParallax() {
-          $('#home').parallax("60%", 100);
-          $('#about').parallax("100%", 80);
-          $('#project').parallax("80%", 60);
-          $('#team').parallax("40%", 40);
-          $('#contact').parallax("20%", 20);
-          }
-        initParallax();
-
-
-        // Owl Carousel
-        var owl = $("#owl-team");
-          owl.owlCarousel({
-            autoPlay: 6000,
-            items : 4,
-            itemsDesktop : [1199,3],
-            itemsDesktopSmall : [979,3],
-            itemsTablet: [768,2],
-            itemsTabletSmall: false,
-            itemsMobile : [479,1],
-            Speedfast: 200,
-        });
-
-})(jQuery);
